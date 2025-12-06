@@ -1,0 +1,60 @@
+from sqlalchemy import create_engine, Column, Integer, String, Float
+from sqlalchemy.orm import sessionmaker, declarative_base
+
+from models.baseMovie import Movie
+from models.baseSeries import Series
+
+database_url = "sqlite:///imb.db"
+
+engine = create_engine(database_url, echo=False)
+
+Base = declarative_base()
+
+class MovieDB(Base):
+    __tablename__ = "Movies"
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    year = Column(Integer)
+    rating = Column(Float)
+
+
+
+class SeriesDB(Base):
+    __tablename__ = "Series"
+    id = Column(Integer, primary_key=True)
+    title = Column(String)
+    year = Column(Integer)
+    seasons = Column(Integer)
+    episodes = Column(Integer)
+
+
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+def adicionar_no_database(catalog):
+    for item in catalog:
+
+        if isinstance(item, Movie):
+            movie_db = MovieDB(
+                title=item.title,
+                year=item.year,
+                rating=item.rating
+            )
+            session.add(movie_db)
+
+        elif isinstance(item, Series):
+            series_db = SeriesDB(
+                title=item.title,
+                year=item.year,
+                seasons=item.seasons,
+                episodes=item.episodes
+            )
+
+    session.commit()
+    print("Itens adicionado ao banco")
+
+
+
+
