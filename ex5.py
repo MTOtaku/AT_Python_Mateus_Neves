@@ -25,6 +25,4 @@ catalog.append(serie2)
 for i,item in enumerate(catalog, start=1):
     print(i,"-", item)
 
-teste1DB(catalog)
-
-teste2DB(serie1)
+adicionar_no_database(catalog) # Isso aq so é o ex 6

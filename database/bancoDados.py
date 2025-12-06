@@ -33,10 +33,21 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
+# Essa parte toda e essa de baixo é do Exercicio 6
+
 def adicionar_no_database(catalog):
     for item in catalog:
 
         if isinstance(item, Movie):
+            existente = session.query(MovieDB).filter_by(
+                title=item.title,
+                year=item.year,
+            ).first()
+
+            if existente:
+                print(f"os Seguinte filme não foi adicionado pois ja existe: {item.title}")
+                continue
+
             movie_db = MovieDB(
                 title=item.title,
                 year=item.year,
@@ -45,12 +56,22 @@ def adicionar_no_database(catalog):
             session.add(movie_db)
 
         elif isinstance(item, Series):
+            existente = session.query(SeriesDB).filter_by(
+                title=item.title,
+                year=item.year
+            ).first()
+
+            if existente:
+                print(f"A seguinte Serie não foi adicionada pois ja existe: {item.title}")
+                continue
+
             series_db = SeriesDB(
                 title=item.title,
                 year=item.year,
                 seasons=item.seasons,
                 episodes=item.episodes
             )
+            session.add(series_db)
 
     session.commit()
     print("Itens adicionado ao banco")

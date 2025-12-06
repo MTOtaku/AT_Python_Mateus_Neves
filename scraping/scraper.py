@@ -30,6 +30,7 @@ def scrape_top_filmes(url, n_filmes=25):
         ano = meta[0].text.strip()
 
         nota = item.find("span", class_="ipc-rating-star--rating").text.strip()
+        nota = nota.replace(",",".")
 
         filmes.append((titulo, ano, nota))
 
