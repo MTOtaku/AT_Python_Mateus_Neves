@@ -1,0 +1,10 @@
+def menu():
+    print("\n==== MENU PRINCIPAL ====")
+    print("1 - Exercicio 5")
+    print("2 - Exercicio 6")
+    print("3 - Exercicio 7")
+    print("4 - Exercicio 8")
+    print("5 - Exercicio 9")
+    print("6 - Exercicio 10")
+    print("0 - Sair")
+    return input("Escolha uma opção: ")

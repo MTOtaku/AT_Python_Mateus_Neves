@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from models.baseMovie import Movie
 from models.baseSeries import Series
 
-database_url = "sqlite:///imb.db"
+database_url = "sqlite:///database/imb.db"
 
 engine = create_engine(database_url, echo=False)
 
