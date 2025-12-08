@@ -35,7 +35,7 @@ def main():
             resumo_por_categoria()
 
         elif opcao == "0":
-            print("Saindo... até mais!")
+            print("Finalizando programa!")
             break
 
         else:
